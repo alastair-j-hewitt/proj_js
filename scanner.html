@@ -1,0 +1,41 @@
+<head>
+    <title>Instascan</title>
+    <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js" ></script>
+    <!-- <link rel="stylesheet" type="text/css" href="/stylesheets/estilo.css"/> -->
+  </head>
+
+    <h1>home#scanner</h1>
+    <p>find me in app/views/home/scanners.html.erb</p>
+
+    <video id="preview"></video>
+    <script>
+        let scanner = new Instascan.Scanner(
+            {
+                video: document.getElementById('preview')
+            }
+        );
+        scanner.addListener('scan', function(content) {
+
+            let paths = ['confirmation.html', 't1.html', 't2.html', 't3.html'];
+            // paths[Math.floor(Math.random() * paths.length)];
+
+          window.location.href = paths[Math.floor(Math.random() * paths.length)];
+
+            //paths[Math.floor(Math.random() * paths.length)];
+            //alert('Escaneou o conteudo: ' + content);
+            // window.open(content, "_blank");
+            sessionStorage.setItem("cont", content);
+
+        });
+        Instascan.Camera.getCameras().then(cameras =>
+        {
+            if(cameras.length > 0){
+                scanner.start(cameras[0]);
+            } else {
+                console.error("Não existe câmera no dispositivo!");
+            }
+        });
+    </script>
+
+    <!-- <button onclick="location.href = 'home';" id="myButton" class="float-left submit-button" >Home</button> -->
+

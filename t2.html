@@ -1,0 +1,28 @@
+<head>
+  <link rel="stylesheet" href="confirmation.css">
+</head>
+
+<h1>Transaction 2 Confirmation</h1>
+  <div class="row" id="confirm_body">
+<div class="col-sm-4 offset-4">
+  <h1>Home#confirmation</h1>
+  <div>Your total is: </div>
+    <br>
+  <div id="con"></div>
+    <br>
+  <div>Confirm purchase?</div>
+    <br>
+  <script type="text/javascript">
+
+
+    var content = sessionStorage.getItem('cont');
+    document.getElementById('con').innerText = content;
+
+    // document.write(typeof content);
+  </script>
+  <div class="btn btn-primary" onclick="location.href = 'pin.html';" style="background-color: blue;">
+    Confirm
+  </div>
+
+</div>
+</div>
