@@ -12,6 +12,10 @@
   /*background-color: blue;*/
 }
 
+video {
+  width: 100%;
+}
+
 /*
 
 Container needed to position the button. Adjust the width as needed

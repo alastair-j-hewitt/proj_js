@@ -2,12 +2,17 @@
     <title>Instascan</title>
     <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js" ></script>
     <!-- <link rel="stylesheet" type="text/css" href="/stylesheets/estilo.css"/> -->
+    <!-- <link rel="stylesheet" href="confirmation.css"> -->
   </head>
 
     <h1>home#scanner</h1>
     <p>find me in app/views/home/scanners.html.erb</p>
 
-    <video id="preview"></video>
+
+<div class="row" style="margin-top: 120px;">
+ <div class="col-sm-4 offset-4" style="text-align: center;">
+
+    <video id="preview" style="width: 90%; box-shadow: 5px; border-radius: 20px;"></video>
     <script>
         let scanner = new Instascan.Scanner(
             {
@@ -29,13 +34,61 @@
         });
         Instascan.Camera.getCameras().then(cameras =>
         {
-            if(cameras.length > 0){
-                scanner.start(cameras[0]);
-            } else {
-                console.error("Não existe câmera no dispositivo!");
+
+
+          if('mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices){
+            // console.log("Let's get this party started");
+            navigator.mediaDevices.getUserMedia({
+              video: {
+                    width: {
+                      min: 1280,
+                      ideal: 1920,
+                      max: 2560,
+              },
+                    height: {
+                     min: 720,
+                     ideal: 1080,
+                     max: 1440
+              },
+                    facingMode: 'environment'
+              }
+            });
+
+            async function getDevices(){
+              const devices = await navigator.mediaDevices.enumerateDevices();
             }
+          }
+
+          // if('mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices){
+          //   const stream = await navigator.mediaDevices.getUserMedia({video: true});
+          // }
+
+
+          /* if(cameras.length > 0){
+                scanner.start(cameras[0]);
+                }
+                */
+
+            // console.log(cameras.values());
+
+            // for (let key in cameras) {
+            //   console.log(key, cameras[key]);
+            //   console.log(cameras[0]);
+            //   // if (cameras[key] != undefined) {
+            //   //   scanner.start();
+            //   // }
+            // }
+
+            // if(cameras.length > 0){
+            //     scanner.start(cameras[0]);
+            // } else {
+            //     console.error("Não existe câmera no dispositivo!");
+            // }
         });
     </script>
+
+     </div>
+</div>
 
     <!-- <button onclick="location.href = 'home';" id="myButton" class="float-left submit-button" >Home</button> -->
 
